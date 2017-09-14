@@ -19,12 +19,12 @@ public class persistence implements persistenceLocal {
     public void persist() {
         
         Bidon p1=new Bidon("etetere");
-        System.out.println("youpi ça marche");
+        
        
        em.persist(p1);
        em.flush(); 
        
-       
+       System.out.println("youpi ça marche");
         
     }
 
