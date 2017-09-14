@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="ControleurMain?section=Test">loool</a>
+        <a href="ControleurMain?section=Test">test</a>
     </body>
 </html>
