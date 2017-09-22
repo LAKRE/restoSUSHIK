@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Ingredient implements Serializable {
@@ -22,17 +24,17 @@ public class Ingredient implements Serializable {
     @Column(nullable = false)
     private int statut;
     
-    @ManyToMany
-    private Collection<Boisson> boissons;
+//    @ManyToMany
+//    private Collection<Boisson> boissons;
     
-    @ManyToMany
-    private Collection<Produit> produits;
     
+    @ManyToMany(mappedBy="ingredients")
+    private Collection<ProduitFactice> produit;
     
 
     public Ingredient() {
-        boissons = new ArrayList<>();
-        produits = new ArrayList<>();
+        produit = new ArrayList<>();
+        
     }
 
     public Ingredient(String nom, int statut) {
