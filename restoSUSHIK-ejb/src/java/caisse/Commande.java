@@ -6,10 +6,17 @@
 package caisse;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -22,6 +29,61 @@ public class Commande implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    
+    private int statut;
+    
+    private String commentaires;
+    
+    @OneToMany()
+    @JoinColumn(name="COMMANDE_ID")
+    private List<LigneCommande> lignes;
+
+    public Commande() {
+        lignes=new ArrayList<>();
+    }
+
+    public Commande(Date date, int statut) {
+        this.date = date;
+        this.statut = statut;
+    }
+
+    public List<LigneCommande> getLignes() {
+        return lignes;
+    }
+
+    public void setLignes(List<LigneCommande> lignes) {
+        this.lignes = lignes;
+    }
+
+    
+    
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getStatut() {
+        return statut;
+    }
+
+    public void setStatut(int statut) {
+        this.statut = statut;
+    }
+
+    public String getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(String commentaires) {
+        this.commentaires = commentaires;
+    }
+    
+    
     public Long getId() {
         return id;
     }
@@ -52,7 +114,7 @@ public class Commande implements Serializable {
 
     @Override
     public String toString() {
-        return "caisse.Commande[ id=" + id + " ]";
+        return "caisse.Commande[ id=" + id +" nom="+commentaires+", liste: "+lignes+" ]";
     }
     
 }

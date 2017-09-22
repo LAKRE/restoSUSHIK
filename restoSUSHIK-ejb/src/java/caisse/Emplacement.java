@@ -6,10 +6,12 @@
 package caisse;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -21,6 +23,30 @@ public class Emplacement implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    
+    private String numeroTable;
+    
+    private int statut;
+
+    public String getNumeroTable() {
+        return numeroTable;
+    }
+
+    public void setNumeroTable(String numeroTable) {
+        this.numeroTable = numeroTable;
+    }
+
+    public int getStatut() {
+        return statut;
+    }
+
+    public void setStatut(int statut) {
+        this.statut = statut;
+    }
+    
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST},mappedBy = "produit")
+    private LigneCommande ligneCommande;
 
     public Long getId() {
         return id;

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -35,17 +36,18 @@ public class Produit implements Serializable {
     @Column(nullable = false)
     private int statut;
 
-    @ManyToMany(mappedBy = "produit")
+    @OneToMany
+    @JoinColumn(name="PRODUIT_ID")
     private Collection<Ingredient> ingredients;
-    @ManyToMany(mappedBy = "produit")
+    
     private Collection<Menu> menus; 
     
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private LigneCommande ligneCommande;
-    
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private Evenement evenement;
-    
+//    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST},mappedBy = "produit")
+//    private LigneCommande ligneCommande;
+//    
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    private Evenement evenement;
+   
     public Produit() {
         ingredients = new ArrayList<>();
         menus = new ArrayList<>();
@@ -60,13 +62,13 @@ public class Produit implements Serializable {
         this.statut = statut;
     }
 
-    public Evenement getEvenement() {
-        return evenement;
-    }
-
-    public void setEvenement(Evenement evenement) {
-        this.evenement = evenement;
-    }
+//    public Evenement getEvenement() {
+//        return evenement;
+//    }
+//
+//    public void setEvenement(Evenement evenement) {
+//        this.evenement = evenement;
+//    }
 
     
     
@@ -87,13 +89,13 @@ public class Produit implements Serializable {
         this.ingredients = ingredients;
     }
 
-    public LigneCommande getLigneCommande() {
-        return ligneCommande;
-    }
-
-    public void setLigneCommande(LigneCommande ligneCommande) {
-        this.ligneCommande = ligneCommande;
-    }
+//    public LigneCommande getLigneCommande() {
+//        return ligneCommande;
+//    }
+//
+//    public void setLigneCommande(LigneCommande ligneCommande) {
+//        this.ligneCommande = ligneCommande;
+//    }
     
 
     public String getNom() {
@@ -170,7 +172,7 @@ public class Produit implements Serializable {
 
     @Override
     public String toString() {
-        return "carte.Produit[ id=" + id + " ]";
+        return "carte.Produit[ id=" + id + ", nom="+nom+" ]";
     }
     
 }
